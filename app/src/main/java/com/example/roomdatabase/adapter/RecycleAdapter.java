@@ -60,6 +60,17 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
             tvNama = itemView.findViewById(R.id.tvNama);
         }
     }
+    private AppDatabase db;
+
+    db = Room.databaseBuilder(getApplicationContext(),
+    AppDatabase.class, "barangdb").build();
+    private void onDeteleBarang(int position){
+        db.barangDAO().deleteBarang(daftarBarang.get(position));
+        daftarBarang.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeRemoved(position, daftarBarang.size());
+    }
+
 
 
 }
